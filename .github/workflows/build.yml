@@ -33,9 +33,9 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod -- --base-href https://sb575.github.io/AspoticMusic/
-          cd aspotic-frontend/wwww
-          cp index.html 404.html
+          ionic build --prod -- --base-href https://sb575.github.io/aspotic/
+          cd wwww
+          cp index.html
       - uses: actions/upload-artifact@v3
         with:
           name: www
