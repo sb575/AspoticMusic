@@ -33,8 +33,9 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod -- --base-href 
-          ls www
+          ionic build --prod
+          cd www
+          cp index.html 404.html
       - uses: actions/upload-artifact@v3
         with:
           name: www
@@ -44,7 +45,7 @@ jobs:
         if: contains(github.ref,'refs/heads/master')
         with:
           branch: gh-pages
-          folder: aspotic-frontend/www
+          folder: www
           clean: true
   build-back:
     runs-on: ubuntu-latest
