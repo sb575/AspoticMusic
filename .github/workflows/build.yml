@@ -26,14 +26,18 @@ jobs:
           npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod
+          ionic build --prod -- --base-href https://sb575.github.io/SpotiBackFront/
           cp www/index.html www/404.html
+      - uses: actions/upload-artifact@v3
+        with:
+          name: www
+          path: www/
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          folder: /aspotic-frontend/www
+          folder: aspotic-frontend/www
           clean: true
   build-back:
     runs-on: ubuntu-latest
