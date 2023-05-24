@@ -8,20 +8,23 @@ on:
   workflow_dispatch:
 
 jobs:
- build-front:
+  build-front:
     runs-on: ubuntu-latest
     container: node:16-alpine
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Build Ionic project
-        run: ionic build --prod
-      - name: Deploy to GitHub Pages
+        run: |
+          ionic build --prod
+          cd www
+          cp index.html 404.html
+      - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
+        if: contains(github.ref,'refs/heads/master')
         with:
           branch: gh-pages
           folder: aspotic-frontend/www
