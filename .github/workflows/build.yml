@@ -2,9 +2,9 @@ name: CC-CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     container: node:16-alpine
     defaults:
       run:
-        working-directory: aspotic-front
+        working-directory: aspotic-frontend
     steps:
       - name: Install git and rsync 📚
         run: |
@@ -38,7 +38,7 @@ jobs:
           path: www/
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
-        if: contains(github.ref,'refs/heads/main')
+        if: contains(github.ref,'refs/heads/master')
         with:
           branch: gh-pages
           folder: app/www
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: aspotic
+        working-directory: aspotic-backend
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js 12
