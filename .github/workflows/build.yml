@@ -23,29 +23,25 @@ jobs:
         run: |
           git config --global http.version HTTP/2
           git config --global http.postBuffer 157286400
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory /__w/sb575.github.io/github-pages-deploy-action-temp-deployment-folder
         working-directory: aspotic-frontend
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: |
+          cd aspotic-frontend
+          npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
+          cd aspotic-frontend
           ionic build --prod
-          cd www
-          cp index.html 404.html
-      - uses: actions/upload-artifact@v3
-        with:
-          name: www
-          path: www/
+          cp aspotic-frontend/www/index.html aspotic-frontend/www/404.html
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
-        if: contains(github.ref,'refs/heads/master')
+        if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          folder: www
+          folder: aspotic-frontend/www
           clean: true
   build-back:
     runs-on: ubuntu-latest
