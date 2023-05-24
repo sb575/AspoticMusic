@@ -27,7 +27,7 @@ jobs:
           npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod -- --base-href https://sb575.github.io/AspoticMusic/
+          ionic build --prod -- --base-href /AspoticMusic/
           cp www/index.html www/404.html
       - uses: actions/upload-artifact@v3
         with:
@@ -39,8 +39,9 @@ jobs:
         with:
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
-          folder: ./aspotic-frontend/www
+          folder: aspotic-frontend/www
           clean: true
+          repository_name: sb575/AspoticMusic
 
   build-back:
     runs-on: ubuntu-latest
