@@ -29,6 +29,7 @@ jobs:
         run: |
           ionic build --prod -- --base-href /AspoticMusic/
           cp www/index.html www/404.html
+          cd aspotic-frontend
       - uses: actions/upload-artifact@v3
         with:
           name: www
@@ -39,7 +40,6 @@ jobs:
         with:
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
-          workspace: aspotic-frontend
           folder: www
           clean: true
 
