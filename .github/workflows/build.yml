@@ -13,7 +13,7 @@ jobs:
     container: node:16-alpine
     defaults:
       run:
-        working-directory: aspotic-frontend
+        working-directory: ./aspotic-frontend
     steps:
       - name: Install git and rsync 📚
         run: |
@@ -24,7 +24,7 @@ jobs:
           git config --global http.version HTTP/2
           git config --global http.postBuffer 157286400
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory /__w/sb575.github.io/github-pages-deploy-action-temp-deployment-folder
+          git config --global --add safe.directory /__w/sb575.github.io/index.html
         working-directory: ../
       - uses: actions/checkout@v2
       - name: Install Ionic
@@ -33,8 +33,8 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod -- --base-href /AspoticMusic/aspotic-frontend/
-          cp www/index.html www/404.html
+          ionic build --prod -- --base-href /AspoticMusic/
+          cp ./dist/app/index.html ./dist/app/404.html
       - uses: actions/upload-artifact@v3
         with:
           name: www
@@ -44,7 +44,7 @@ jobs:
         if: contains(github.ref,'refs/heads/master')
         with:
           branch: gh-pages
-          folder: aspotic-frontend/www
+          folder: aspotic-frontend/dist/app
           clean: true
   build-back:
     runs-on: ubuntu-latest
