@@ -42,7 +42,7 @@ jobs:
         with:
           branch: gh-pages
           folder: aspotic-frontend/www
-          clean: true
+          clean: false
   build-back:
     runs-on: ubuntu-latest
     defaults:
