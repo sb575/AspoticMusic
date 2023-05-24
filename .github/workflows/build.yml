@@ -13,7 +13,7 @@ jobs:
     container: node:16-alpine
     defaults:
       run:
-        working-directory: ./aspotic-frontend
+        working-directory: aspotic-frontend
     steps:
       - name: Install git and rsync 📚
         run: |
@@ -33,7 +33,8 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod -- --base-href https://sb575.github.io/AspoticMusic/aspotic-frontend/
+          ionic build --prod -- --base-href https://sb575.github.io/AspoticMusic/
+          ls www
       - uses: actions/upload-artifact@v3
         with:
           name: www
@@ -49,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./aspotic-backend
+        working-directory: aspotic-backend
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js 12
