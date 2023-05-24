@@ -32,12 +32,11 @@ jobs:
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href /AspoticMusic/
-          cd www
-          cp index.html 404.html
+          cp src/www/index.html src/www/404.html
       - uses: actions/upload-artifact@v3
         with:
           name: www
-          path: www/
+          path: src/www/
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/master')
