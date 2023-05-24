@@ -28,7 +28,7 @@ jobs:
       - name: Install Ionic
         run: npm install -g @ionic/cli
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href https://aspotic.github.io/SpotiBackFront/
