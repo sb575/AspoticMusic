@@ -33,7 +33,7 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          ionic build --prod -- --base-href https://sb575.github.io/aspotic/
+          ionic build --prod -- --base-href 
           ls www
       - uses: actions/upload-artifact@v3
         with:
