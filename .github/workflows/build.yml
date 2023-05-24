@@ -28,7 +28,6 @@ jobs:
         run: |
           ionic build --prod -- --base-href https://sb575.github.io/SpotiBackFront/
           cp www/index.html www/404.html
-          git init
       - uses: actions/upload-artifact@v3
         with:
           name: www
