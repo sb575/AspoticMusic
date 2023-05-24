@@ -36,7 +36,7 @@
     "@ionic/storage-angular": "^3.0.6",
     "bson-objectid": "^2.0.4",
     "capacitor": "^0.5.5",
-    "firebase": "^9.22.0",
+    "firebase": "^9.18.0",
     "geolocation": "^0.2.0",
     "ionicons": "^7.0.0",
     "jwt-decode": "^3.1.2",
