@@ -15,11 +15,11 @@ jobs:
       run:
         working-directory: aspotic-frontend
     steps:
-      - name: Install git and rsync 📚
+      - name: Install git and rsync
         run: |
           apk update && apk add git rsync
         working-directory: ../
-      - name: Configure git to trust the workspace despite the different owner
+      - name: Configure git
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /__w/sb575.github.io/github-pages-deploy-action-temp-deployment-folder
