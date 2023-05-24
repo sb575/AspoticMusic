@@ -39,7 +39,7 @@ jobs:
         with:
           branch: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository_name: sb575/AspoticMusic
+          repository-name: sb575/AspoticMusic
           folder: aspotic-frontend/www
           clean: true
 
