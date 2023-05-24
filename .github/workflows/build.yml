@@ -13,26 +13,26 @@ jobs:
     container: node:16-alpine
     defaults:
       run:
-        working-directory: aspotic-frontend
+        working-directory: ../../aspotic-frontend
     steps:
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: |
-          cd aspotic-frontend
+          cd ../../aspotic-frontend
           npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          cd aspotic-frontend
+          cd ../../aspotic-frontend
           ionic build --prod
-          cp aspotic-frontend/www/index.html aspotic-frontend/www/404.html
+          cp ../../aspotic-frontend/www/index.html ../../aspotic-frontend/www/404.html
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          folder: aspotic-frontend/www
+          folder: ../../aspotic-frontend/www
           clean: true
   build-back:
     runs-on: ubuntu-latest
