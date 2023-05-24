@@ -18,12 +18,14 @@ jobs:
       - name: Install git and rsync 📚
         run: |
           apk update && apk add git rsync
-        working-directory: aspotic-frontend
+        working-directory: ../
       - name: Configure git to trust the workspace despite the different owner
         run: |
           git config --global http.version HTTP/2
           git config --global http.postBuffer 157286400
-        working-directory: ../
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory /__w/sb575.github.io/github-pages-deploy-action-temp-deployment-folder
+        working-directory: aspotic-frontend
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
