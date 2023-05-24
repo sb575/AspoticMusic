@@ -1,4 +1,4 @@
-name: CC-CI
+name: CD/CI
 
 on:
   push:
