@@ -34,7 +34,7 @@ jobs:
       - name: Build Ionic project
         run: |
           ionic build --prod
-          cd aspotic-frontend/www
+          cd ./aspotic-frontend/www
           cp index.html 404.html
       - uses: actions/upload-artifact@v3
         with:
