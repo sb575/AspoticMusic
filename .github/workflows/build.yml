@@ -20,19 +20,17 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: |
-          cd ../../aspotic-frontend
           npm install --legacy-peer-deps
       - name: Build Ionic project
         run: |
-          cd ../../aspotic-frontend
           ionic build --prod
-          cp ../../aspotic-frontend/www/index.html ../../aspotic-frontend/www/404.html
+          cp www/index.html www/404.html
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          folder: ../../aspotic-frontend/www
+          folder: www
           clean: true
   build-back:
     runs-on: ubuntu-latest
