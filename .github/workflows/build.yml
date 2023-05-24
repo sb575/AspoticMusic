@@ -21,6 +21,8 @@ jobs:
         working-directory: ../
       - name: Configure git to trust the workspace despite the different owner
         run: |
+          git config --global http.version HTTP/2
+          git config --global http.postBuffer 157286400
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /__w/aspotic.github.io/github-pages-deploy-action-temp-deployment-folder
         working-directory: ../
