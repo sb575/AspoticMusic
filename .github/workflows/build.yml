@@ -15,6 +15,9 @@ jobs:
       run:
         working-directory: aspotic-frontend
     steps:
+      - name: Install git and rsync 📚
+        run: apk update && apk add git rsync
+        working-directory: ../
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
@@ -30,7 +33,7 @@ jobs:
         if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          folder: aspotic-frontend/www
+          folder: www
           clean: true
   build-back:
     runs-on: ubuntu-latest
