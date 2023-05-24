@@ -38,8 +38,8 @@ jobs:
         if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./aspotic-frontend/www
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: ./aspotic-frontend/www
           clean: true
 
   build-back:
