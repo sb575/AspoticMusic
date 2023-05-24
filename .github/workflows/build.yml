@@ -11,6 +11,9 @@ jobs:
   build-front:
     runs-on: ubuntu-latest
     container: node:16-alpine
+    defaults:
+      run:
+        working-directory: aspotic-frontend
     steps:
       - uses: actions/checkout@v2
       - name: Install Ionic
