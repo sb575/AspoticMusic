@@ -33,7 +33,7 @@ jobs:
         if: contains(github.ref, 'refs/heads/master')
         with:
           branch: gh-pages
-          folder: aspotic-frontend/www
+          folder: /aspotic-frontend/www
           clean: true
   build-back:
     runs-on: ubuntu-latest
