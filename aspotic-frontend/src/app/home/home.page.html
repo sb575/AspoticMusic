@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+        <ion-title class="custom-title">ASPOTIC</ion-title>
+        <ion-button slot="end" class="custom-btn" (click)="signIn()">
+          Sign In
+        </ion-button>
+        <ion-button slot="end" class="custom-btn add-margin-right" (click)="signUp()">
+          Sign Up
+        </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="search-container">
+    <ion-item>
+      <ion-label>Search by:</ion-label>
+      <ion-select [(ngModel)]="searchOption">
+        <ion-select-option value="name">Name</ion-select-option>
+        <ion-select-option value="artist">Artist</ion-select-option>
+        <ion-select-option value="date">Date</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-searchbar class="custom" placeholder="Enter the name of the song" mode="ios" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-button class="custom-btn" (click)="searchTracks()">Search</ion-button>
+  </div>
+
+  <div id="container">
+
+    <ion-grid class="cards">
+      <ion-row>
+        <ion-col  size-lg="2" size-md="8" size-sm="4" size="12" *ngFor="let track of tracks">
+          <div class="card" >
+            <img [src]="track.album.images[0].url" [routerLink]="['/track-details', track._id]">
+          <div class="title" >
+            <ion-card-title>{{ track.name }}</ion-card-title>
+            <ion-card-subtitle *ngFor="let artist of track.album.artists">{{ artist.name }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ track.album.name }} ({{ track.album.release_date }})</ion-card-subtitle>
+          </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>
+
+

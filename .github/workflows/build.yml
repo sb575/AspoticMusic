@@ -1,0 +1,59 @@
+name: CC-CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-front:
+    runs-on: ubuntu-latest
+    container: node:16-alpine
+    defaults:
+      run:
+        working-directory: aspotic-front
+    steps:
+      - name: Install git and rsync 📚
+        run: |
+          apk update && apk add git rsync
+        working-directory: ../
+      - name: Configure git to trust the workspace despite the different owner
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory /__w/aspotic.github.io/github-pages-deploy-action-temp-deployment-folder
+        working-directory: ../
+      - uses: actions/checkout@v2
+      - name: Install Ionic
+        run: npm install -g @ionic/cli
+      - name: Install dependencies
+        run: npm install
+      - name: Build Ionic project
+        run: |
+          ionic build --prod -- --base-href https://aspotic.github.io/SpotiBackFront/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: www
+          path: www/
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        if: contains(github.ref,'refs/heads/main')
+        with:
+          branch: gh-pages
+          folder: app/www
+          clean: true
+  build-back:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aspotic
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 12
+      uses: actions/setup-node@v2
+      with:
+        node-version: 12.x
+    - run: npm i
+    - run: npm run build --if-present
+    - run: npm test

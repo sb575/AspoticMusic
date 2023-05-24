@@ -1,0 +1,44 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Sing In</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon  name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="formValidation">
+  <div id="container">
+    <form class="form" [formGroup]="formValidation" (ngSubmit)="tryLogin(formValidation.value)">
+      <ion-item id="item" fill="outline">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" formControlName="username" ></ion-input>
+      </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of formValidationMessages.username">
+          <div class="error-message"
+            *ngIf="formValidation?.get('username')?.hasError(validation.type) && (formValidation.get('username')?.dirty || formValidation.get('username')?.touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item id="item" fill="outline">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of formValidationMessages.password">
+          <div class="error-message"
+            *ngIf="formValidation.get('password')?.hasError(validation.type) && (formValidation.get('password')?.dirty || formValidation.get('password')?.touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <div class="div-button-login">
+        <ion-button type="submit" [disabled]="!formValidation.valid">Sign In</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

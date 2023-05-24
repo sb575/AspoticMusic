@@ -1,0 +1,135 @@
+.custom-title {
+  color: #858BFF;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+  margin-bottom: 20px;
+}
+
+ion-card {
+  width: 150px;
+  height: 140px;
+  margin: 50px;
+  position: relative;
+}
+
+ion-card:hover .overlayer {
+  visibility: visible;
+}
+
+ion-card img {
+  width: 100%;
+  height: 100%;
+}
+
+
+ion-card .title  {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 180px;
+}
+
+ion-card-title{
+  font-size: medium;
+  color: #ffffff;
+  text-align: center;
+  justify-content: center;
+}
+
+ion-card-subtitle{
+  font-size: small;
+  color: #cccccc;
+  text-align: center;
+  justify-content: center;
+}
+
+ion-card .title a {
+  top: -175px;
+  color: #ffffff;
+  position: relative;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+ion-fab {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+
+ion-fab-button {
+  font-size: 16px;
+}
+
+
+ion-icon{
+  text-align: center;
+}
+
+.center-btn{
+  margin-right: 15px;
+}
+
+img {
+  border-radius: 5%;
+}
+
+
+ion-icon {
+  color: #ffffff;
+}
+
+
+.custom-btn {
+  --background: #858BFF;
+  --color: white;
+  --border-radius: 25px;
+  text-transform: capitalize;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.custom-btn-add {
+  --background: #858BFF;
+  --color: white;
+  --border-radius: 25px;
+  text-transform: capitalize;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.add-margin-right{
+  margin-right: 15px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .search-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .custom-btn {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+}
+
+@media only screen and (min-width: 601px) {
+  .search-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .custom-btn {
+    margin-right: 15px;
+  }
+
+}

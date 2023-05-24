@@ -1,0 +1,53 @@
+<app-explore-container></app-explore-container>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item>
+    <ion-segment [(ngModel)]="searchOption">
+      <ion-segment-button value="name">
+        Search by name
+      </ion-segment-button>
+      <ion-segment-button value="artist">
+        artist
+      </ion-segment-button>
+      <ion-segment-button value="date">
+        date
+      </ion-segment-button>
+    </ion-segment>
+  </ion-item>
+
+  <div class="search-container">
+    <ion-searchbar class="custom" placeholder="Search track" mode="ios" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-button class="custom-btn" (keyup.enter)="searchTracks()" (click)="searchTracks()">Search</ion-button>
+  </div>
+
+  <div id="container">
+
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button  class="custom-floating-btn floating-button" (click)="openModal()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+    <ion-grid class="cards">
+      <ion-row>
+        <ion-col size-lg="2" size-md="6" size-sm="4" size="6" *ngFor="let track of tracks" >
+          <div class="card">
+            <img [src]="track.album.images[0].url" [routerLink]="['/track-details', track._id]">
+          <div class="title" >
+            <ion-card-title>{{ track.name }}</ion-card-title>
+            <ion-card-subtitle *ngFor="let artist of track.album.artists">{{ artist.name }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ track.album.name }} ({{ track.album.release_date }})</ion-card-subtitle>
+            <div class="button-space"></div>
+          </div>
+          <div  *ngIf="track.userId === userIdLogged && userIdLogged !== '' "  (click)="deleteTrack(track)" class="button-container card-delete-button ion-float-end">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f50000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#fe5858" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 11V17" stroke="#fe5858" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#fe5858" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#fe5858" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#fe5858" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+

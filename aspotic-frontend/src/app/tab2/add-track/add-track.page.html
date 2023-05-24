@@ -1,0 +1,32 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Add track</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon  name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="trackForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Track name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Artist name</ion-label>
+      <ion-input formControlName="artist"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Track image</ion-label>
+      <ion-input formControlName="imageUrl"></ion-input>
+    </ion-item>
+
+    <ion-button  expand="block" (click)="selectFromCamera()">Seleccionar desde Cámara</ion-button>
+    <ion-button type="submit" expand="block" [disabled]="trackForm.invalid">Add track</ion-button>
+  </form>
+</ion-content>

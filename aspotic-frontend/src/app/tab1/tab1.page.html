@@ -1,0 +1,43 @@
+<app-explore-container></app-explore-container>
+
+
+<ion-content>
+
+  <div class="search-container">
+    <ion-searchbar class="custom" placeholder="Enter the name of the song" mode="ios" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-button class="custom-btn" (click)="doSearch()" [disabled]="loading">Search</ion-button>
+    <ion-button class="custom-btn-add" slot="end" *ngIf="showAddSongsButton" (click)="addSongs()">
+      <ion-icon slot="start" name="add-circle"></ion-icon>
+      Añadir canciones
+    </ion-button>
+  </div>
+
+  <div id="container">
+
+    <div class="spinner-container">
+      <ion-spinner class="spinner-large" name="bubbles" *ngIf="loading" slot="start" color="primary"></ion-spinner>
+    </div>
+
+    <ion-grid class="cards" *ngIf="!loading">
+      <ion-row>
+        <ion-col size-lg="2" size-md="6" size-sm="4" size="6" *ngFor="let track of tracks; let i = index;" >
+          <div class="card" (click)="onTrackSelected(i)"  [class.selected]="selectedTracks[i]">
+            <img [src]="track.album.images[0].url">
+          <div class="title" >
+            <ion-card-title>{{ track.name }}</ion-card-title>
+            <ion-card-subtitle *ngFor="let artist of track.album.artists">{{ artist.name }}</ion-card-subtitle>
+            <ion-card-subtitle>({{ track.album.release_date }})</ion-card-subtitle>
+          </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="pagination" *ngIf="tracks.length > 0">
+    <button *ngIf="page !== 1" class="page-button" (click)="prevPage()"><ion-icon name="chevron-back-outline"></ion-icon></button>
+    <div class="page-btn-div">{{ page }}</div>
+    <button *ngIf="page !== totalPages" class="page-button" (click)="nextPage()"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,140 @@
+ion-card{
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+
+.custom-btn {
+  --background: #858BFF;
+  --color: white;
+  --border-radius: 25px;
+  margin-left: 10px;
+  text-transform: capitalize;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 15px;
+}
+
+.float-container {
+  position: relative;
+  width: 100%;
+}
+
+.float-child-right {
+  float: left;
+}
+
+
+.float-child-left {
+  float: left;
+  margin-right: 10px;
+}
+
+.info-col {
+  display: table;
+  flex-direction: column;
+}
+
+.card-button {
+  display: table;
+  margin-top: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .col-size{
+    width: 100%;
+    border-radius: 10px;
+    max-width: fit-content !important;
+  }
+
+  .card-button {
+    width: 100%;
+  }
+
+  .float-child-right {
+    float: left;
+  }
+
+}
+
+@media only screen and (min-width: 601px) {
+
+  .col-size{
+    height: 205px;
+    border-radius: 10px;
+    max-width: fit-content !important;
+  }
+
+  .card-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: auto;
+  }
+
+}
+
+.date{
+  font-size: 12px;
+  color: rgb(169 169 169);
+  font-weight: normal;
+  padding-right: 10px;
+}
+
+.comment-user{
+  display: inline-flex;
+  font-size: 12px;
+  color: rgb(255, 0, 0);
+  font-weight: normal;
+}
+
+
+.custom-img{
+  width: 45px !important;
+  margin: 10px !important;
+  border-radius: 200px !important;
+}
+
+.comment-card {
+  margin-bottom: 10px;
+}
+
+.comment-author {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.comment-rating ion-icon {
+  font-size: 18px;
+}
+
+.comment-text {
+  margin-bottom: 10px;
+}
+
+
+
+ svg {
+  width: 20px;
+  height: 20px;
+ }
+
+
+ .card-delete-button {
+  border: 1px solid #ff0000;
+  display: flex;
+  padding: .3em;
+  width: auto;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: .3s ease-in-out;
+ }
+
+ .card-delete-button:hover {
+  border: 1px solid #ffcaa6;
+  background-color: #ffcaa6;
+ }
+
+

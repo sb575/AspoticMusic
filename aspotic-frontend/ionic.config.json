@@ -1,0 +1,7 @@
+{
+  "name": "aspotic-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
