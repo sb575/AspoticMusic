@@ -32,8 +32,7 @@ jobs:
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href https://aspotic-frontend-4k6yuskwcq-uc.a.run.app/
-          cd www
-          cp index.html 404.html
+          cp www/index.html www/404.html
       - uses: actions/upload-artifact@v3
         with:
           name: www
