@@ -37,7 +37,7 @@
           <div class="title" >
             <ion-card-title>{{ track.name }}</ion-card-title>
             <ion-card-subtitle *ngFor="let artist of track.album.artists">{{ artist.name }}</ion-card-subtitle>
-            <ion-card-subtitle>{{ track.album.name } ({ track.album.release_date })}</ion-card-subtitle>
+            <ion-card-subtitle>{{ track.album.name }} ({{ track.album.release_date }})</ion-card-subtitle>
             <div class="button-space"></div>
           </div>
           <div  *ngIf="track.userId === userIdLogged && userIdLogged !== '' "  (click)="deleteTrack(track)" class="button-container card-delete-button ion-float-end">
