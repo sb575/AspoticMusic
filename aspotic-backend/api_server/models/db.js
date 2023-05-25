@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'); 
 
-mongoose.connect('mongodb+srv://sb575:Aspotic12344321@aspoticcluster.dyosyas.mongodb.net/aspotic', {useUnifiedTopology:true, useNewUrlParser: true}).then(
+mongoose.connect('mongodb://mongodb:27017/aspotic', {useUnifiedTopology:true, useNewUrlParser: true}).then(
     () => {console.log("connected to DB")},
     err => {console.log(err)}
 ); 

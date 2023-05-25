@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class AspoticserviceService {
 
-  url = 'http://localhost:3000/api';
+  url = 'http://webapps.mycnsamastertaii.tech:3000/api';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
