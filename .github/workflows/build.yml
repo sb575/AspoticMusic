@@ -58,3 +58,23 @@ jobs:
     - run: npm i
     - run: npm run build --if-present
     - run: npm test
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Server
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: 'un-valor-para-que-no-de-error'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H webapps.mycnsamastertaii.tech >> ~/.ssh/known_hosts
+      - name: Deploy
+        run: |
+            ssh ubuntu@webapps.mycnsamastertaii.tech "if [ ! -d 'AspoticMusic' ]; then \
+                git clone https://github.com/sb575/AspoticMusic.git; \
+              else \
+                cd AspoticMusic/aspotic-backend && git stash && git fetch --all && git reset --hard origin/master && git pull origin master; \
+              fi"
+            ssh ubuntu@webapps.mycnsamastertaii.tech "cd AspoticMusic/aspotic-backend && echo -e 'SPOTIFY_API_ID=${{ secrets.SPOTIFY_API_ID }}\nSPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }}' > .env"
+            ssh ubuntu@webapps.mycnsamastertaii.tech "cd AspoticMusic/aspotic-backend && docker-compose pull && docker-compose up -d --remove-orphans && yes | docker image prune"
