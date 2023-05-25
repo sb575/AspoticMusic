@@ -13,7 +13,7 @@ import jwtDecode from 'jwt-decode';
 })
 export class AuthService {
 
-  url = 'http://localhost:3000/api';
+  url = 'http://webapps.mycnsamastertaii.tech:3000/api';
 
   userData: any;
 
