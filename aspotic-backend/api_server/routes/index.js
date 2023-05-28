@@ -145,6 +145,8 @@ router.get('/search/track/:name', ctrlTrack.searchTrackSpotify);
  * /recomendations:
  *   get:
  *     summary: get recomendation tracks
+ *     tags:
+ *       - tracks
  *     responses:
  *       200:
  *         description: Lista de recomendaciones de canciones

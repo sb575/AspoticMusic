@@ -88,7 +88,7 @@ module.exports.trackFindAll = function(req, res) {
  module.exports.getRecomendations = async function(req, res) {
   try {
 
-    const tracks = this.trackFindAll();
+    const tracks = module.exports.trackFindAll;
 
     const seedTracks = tracks.map((track) => track.id);
 
