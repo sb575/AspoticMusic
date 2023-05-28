@@ -3,6 +3,7 @@ var Track = mongoose.model('Track');
 var User = mongoose.model('User'); // Importa el modelo de usuario
 var CommentData = mongoose.model('CommentData'); 
 const ObjectId = mongoose.Types.ObjectId;
+const { trackFindAll } = require('../controllers/track'); // Asegúrate de proporcionar la ruta correcta al archivo donde se encuentra la función trackFindAll
 
 var config = require('../config');
 const axios = require('axios');
@@ -88,11 +89,12 @@ module.exports.trackFindAll = function(req, res) {
  module.exports.getRecomendations = async function(req, res) {
   try {
 
-    const tracks = module.exports.trackFindAll;
+    trackFindAll(req, {
+      json: async function(tracks) {
+      
+        const seedTracks = tracks.map((track) => track.id);
 
-    const seedTracks = tracks.map((track) => track.id);
-
-    const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks.join(',')}`, {
+        const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks.join(',')}`, {
       headers: {
         'Authorization': `Bearer ${config.accessToken}`
       }
@@ -120,13 +122,11 @@ module.exports.trackFindAll = function(req, res) {
         latitude: item.latitude,
         longitude: item.longitude,
         accuracy: item.accuracy
-      };
-    });
-
-    res.status(200).json(recomendations);
-    console.log(response.data);
-
-  } catch (error) {
+      }});
+      res.status(200).json(recomendations);
+      console.log(response.data);
+    }})
+   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
   }
