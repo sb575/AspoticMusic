@@ -254,3 +254,13 @@ ion-title{
   left: 50%;
   transform: translateX(-50%);
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 30px;
+  margin-right: 10px;
+}

@@ -29,6 +29,7 @@ export class AddTrackPage implements OnInit {
     this.trackForm = this.formBuilder.group({
       name: ['', Validators.required],
       artist: ['', Validators.required],
+      album: ['', Validators.required],
       imageUrl: ['', Validators.required],
     });
   }
@@ -108,7 +109,7 @@ export class AddTrackPage implements OnInit {
           artists: [{ id: '', name: trackData.artist }],
           id: '',
           images: [{ height: 300, url: trackData.imageUrl, width: 300 }],
-          name: '',
+          name: trackData.album,
           release_date: date,
           release_date_precision: '',
           total_tracks: 0

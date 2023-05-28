@@ -87,42 +87,75 @@ module.exports.trackFindAll = function(req, res) {
  }
 
  /* GET api/recomendations */
-module.exports.getRecomendations = async function(req, res) {
+ module.exports.getRecomendations = async function(req, res) {
   try {
-    // Obtén las tracks desde la base de datos
     const tracks = await Track.find().exec();
 
-       // Verifica si hay tracks en la base de datos
     if (tracks.length === 0) {
-      return res.status(404).json({ error: 'No se encontraron tracks en la base de datos' });
+      return res.status(404).json({ error: 'No tracks found in the database.' });
     }
-    // Extrae los IDs de las tracks para usar como semillas en la API de Spotify
-    const trackIds = tracks.map(track => track.id);
+    const trackIds = await Promise.all(tracks.map(track => getSpotifyTrackId(track)));
 
-  
-    // Construye la URL para hacer la solicitud a la API de Spotify
+    const filteredTrackIds = trackIds.filter(id => id !== null);
+
+    if (filteredTrackIds.length === 0) {
+      return res.status(404).json({ error: 'No tracks found in Spotify API.' });
+    }
+
+    const artistIds = tracks.reduce((ids, track) => {
+      track.album.artists.forEach(artist => {
+        if (!ids.includes(artist.id)) {
+          ids.push(artist.id);
+        }
+      });
+      return ids;
+    }, []);
+
     const baseUrl = 'https://api.spotify.com/v1/recommendations';
-    const seedQuery = `seed_tracks=${trackIds.join(',')}`;
+    const seedQuery = `seed_tracks=${filteredTrackIds.join(',')}&seed_artists=${artistIds.join(',')}`;
     const apiUrl = `${baseUrl}?${seedQuery}`;
 
-    // Haz la solicitud a la API de Spotify para obtener las recomendaciones
     const response = await axios.get(apiUrl, {
       headers: {
         'Authorization': `Bearer ${config.accessToken}`
       },
     });
 
-    // Obtén las recomendaciones de la respuesta de la API de Spotify
-    const recommendations = response.data.tracks;
-    res.status(200).json(recommendations);
-    console.log(recommendations);
+    if (response.status === 200) {
+      const recommendations = response.data.tracks;
+      res.status(200).json(recommendations);
+    } else {
+      res.status(response.status).json({ error: 'Spotify API error.' });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal error on the server.' });
   }
 };
 
+async function getSpotifyTrackId(track) {
+  try {
+    const response = await axios.get('https://api.spotify.com/v1/search', {
+      headers: {
+        'Authorization': `Bearer ${config.accessToken}`
+      },
+      params: {
+        q: track.id,
+        type: 'track',
+        limit: 1
+      }
+    });
 
+    const spotifyTracks = response.data.tracks.items;
+    if (spotifyTracks.length > 0) {
+      return spotifyTracks[0].id;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+  return null;
+}
 
 /* POST api/tracks */
  module.exports.addSelectedTracks = async function(req, res) {

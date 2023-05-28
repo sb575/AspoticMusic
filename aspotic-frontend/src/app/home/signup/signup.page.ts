@@ -15,14 +15,14 @@ export class SignupPage implements OnInit {
   errorMessage: string = '';
 
   formValidationMessages = {
-   'username': [
-     { type: 'required', message: 'El email es un campo obligatorio.' },
-     { type: 'pattern', message: 'El formato del email no es correcto.' }
-   ],
-   'password': [
-     { type: 'required', message: 'La contraseña es un campo obligatorio.' },
-     { type: 'minlength', message: 'La lóngitud mínima de una contraseña es 6 caracteres.' }
-   ]
+    'username': [
+      { type: 'required', message: 'Email is a required field.' },
+      { type: 'pattern', message: 'The email format is not correct.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is a required field.' },
+      { type: 'minlength', message: 'The minimum length of a password is 6 characters.' }
+    ]
  };
 
   constructor(

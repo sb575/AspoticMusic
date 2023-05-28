@@ -28,6 +28,9 @@
               <ion-card-subtitle>Album: {{ track.album.name }}</ion-card-subtitle>
               <ion-card-subtitle *ngFor="let artist of track.album.artists">Artist: {{ artist.name }} </ion-card-subtitle>
             </ion-card-content>
+            <audio controls>
+              <source [src]="track.preview_url" type="audio/mp3">
+            </audio>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -38,7 +41,7 @@
 
 
   <ion-card-header>
-    <ion-label>Comments</ion-label>
+  <ion-label class="title-sections">Comments</ion-label>
   </ion-card-header>
   <ion-card class="comment-card" *ngFor="let comment of (track | async)?.comments">
     <ion-row>

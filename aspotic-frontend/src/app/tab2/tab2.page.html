@@ -19,13 +19,13 @@
   <div class="search-container">
     <ion-searchbar class="custom" placeholder="Search track" mode="ios" [(ngModel)]="searchTerm" (keyup.enter)="searchTracks()"></ion-searchbar>
     <ion-button class="custom-btn" (keyup.enter)="searchTracks()" (click)="searchTracks()">Search</ion-button>
-    <ion-button class="custom-btn" (click)="getRecomendations()">Get recomendations</ion-button>
+    <ion-button class="custom-btn" (click)="getRecomendations()">Get recommendations</ion-button>
   </div>
 
   <div id="container">
 
 
-    <h1 class="title-sections" *ngIf="recomendations.length !== 0">Recomendation list</h1>
+    <h1 class="title-sections" *ngIf="recomendations.length !== 0">Recommendation list</h1>
     <div class="swiper" *ngIf="recomendations.length !== 0">
       <swiper-container space-between="8" slides-per-view="4">
         <swiper-slide *ngFor="let track of recomendations">

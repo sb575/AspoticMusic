@@ -1,5 +1,39 @@
+.form {
+  width: 100%;
+  padding: 10px;
+}
+
 .error-message {
   color: red;
   font-size: 14px;
   margin-top: 5px;
+}
+
+
+#items {
+  display: inline-block;
+  width: 55vh;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+
+
+.div-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.custom-btn {
+  --background: #858BFF;
+  --color: white;
+  --border-radius: 25px;
+  text-transform: capitalize;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+ion-button{
+  width: 100%;
 }

@@ -28,14 +28,14 @@ export class AddCommentPage implements OnInit {
 
   formValidationMessages = {
    'author': [
-     { type: 'required', message: 'El autor es un campo obligatorio.'},
+     { type: 'required', message: 'Author is a required field.'},
    ],
    'comment': [
-     { type: 'required', message: 'El comentario es un campo obligatorio.' },
-     { type: 'maxlength', message: 'La lóngitud máxima de un comentario es 1000 caracteres.' }
+     { type: 'required', message: 'Comment is a required field.' },
+     { type: 'maxlength', message: 'The maximum length of a comment is 1000 characters.' }
    ],
    'rating': [
-    { type: 'required', message: 'El rating es un campo obligatorio.' },
+    { type: 'required', message: 'Rating is a required field.' },
   ]
  };
 
