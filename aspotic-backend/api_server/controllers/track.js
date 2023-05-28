@@ -86,51 +86,52 @@ module.exports.trackFindAll = function(req, res) {
  }
 
  /* GET api/recomendations */
- module.exports.getRecomendations = async function(req, res) {
-  try {
+module.exports.getRecomendations = function(req, res) {
+  Track.find()
+    .then(function(tracks) {
+      const seedTracks = tracks.map((track) => track.id);
 
-    trackFindAll(req, {
-      json: async function(tracks) {
-      
-        const seedTracks = tracks.map((track) => track.id);
+      return axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks.join(',')}`, {
+        headers: {
+          'Authorization': `Bearer ${config.accessToken}`
+        }
+      });
+    })
+    .then(function(response) {
+      const recomendations = response.data.tracks.map((item) => {
+        return {
+          id: item.id,
+          album: {
+            id: item.album.id,
+            name: item.album.name,
+            artists: item.album.artists.map((artist) => {
+              return { id: artist.id, name: artist.name };
+            }),
+            images: item.album.images.map((image) => {
+              return { height: image.height, url: image.url, width: image.width };
+            }),
+            release_date: item.album.release_date,
+            release_date_precision: item.album.release_date_precision,
+            total_tracks: item.album.total_tracks,
+          },
+          name: item.name,
+          duration_ms: item.duration_ms,
+          comments: [],
+          latitude: item.latitude,
+          longitude: item.longitude,
+          accuracy: item.accuracy
+        };
+      });
 
-        const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks.join(',')}`, {
-      headers: {
-        'Authorization': `Bearer ${config.accessToken}`
-      }
-    });
-
-    const recomendations = response.data.tracks.map((item) => {
-      return {
-        id: item.id,
-        album: {
-          id: item.album.id,
-          name: item.album.name,
-          artists: item.album.artists.map((artist) => {
-            return { id: artist.id, name: artist.name };
-          }),
-          images: item.album.images.map((image) => {
-            return { height: image.height, url: image.url, width: image.width };
-          }),
-          release_date: item.album.release_date,
-          release_date_precision: item.album.release_date_precision,
-          total_tracks: item.album.total_tracks,
-        },
-        name: item.name,
-        duration_ms: item.duration_ms,
-        comments: [],
-        latitude: item.latitude,
-        longitude: item.longitude,
-        accuracy: item.accuracy
-      }});
       res.status(200).json(recomendations);
       console.log(response.data);
-    }})
-   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
-}
+    })
+    .catch(function(error) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
+    });
+};
+
 
 /* POST api/tracks */
  module.exports.addSelectedTracks = async function(req, res) {
