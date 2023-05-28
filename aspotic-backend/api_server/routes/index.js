@@ -102,8 +102,6 @@ router.get('/token', middleware.getAuth);
  *           type: string
  *         duration_ms:
  *           type: integer
- *         id:
- *           type: string
  *         preview_url:
  *           type: string
  *         comments:
@@ -141,7 +139,9 @@ router.get('/token', middleware.getAuth);
  *         - author
  *         - comment
  *         - createdOn
+ * 
  */
+
 router.get('/search/track/:name', ctrlTrack.searchTrackSpotify);
 
 /**
