@@ -102,7 +102,7 @@ router.get('/token', middleware.getAuth);
  *           type: string
  *         duration_ms:
  *           type: integer
- *         spotifyId:
+ *         id:
  *           type: string
  *         preview_url:
  *           type: string
@@ -351,7 +351,7 @@ router.get('/tracks/searchTrackDate/:date', ctrlTrack.getTracksByDate);
  *                     total_tracks:
  *                       type: number
  *                       description: Total tracks
- *                     spotifyId:
+ *                     id:
  *                       type: string
  *                     preview_url:
  *                       type: string

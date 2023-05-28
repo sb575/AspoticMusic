@@ -5,7 +5,7 @@ export interface Track {
   duration_ms: number
   album: Album
   comments: CommentData[],
-  spotifyId: string,
+  id: string,
   preview_url: string,
   longitude?: number;
   latitude?: number;

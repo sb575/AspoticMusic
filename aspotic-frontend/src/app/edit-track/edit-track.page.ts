@@ -103,7 +103,7 @@ export class EditTrackPage implements OnInit {
       duration_ms: 0,
       comments: [],
       userId: userId,
-      spotifyId: '',
+      id: '',
       preview_url: ''
     };
 

@@ -47,7 +47,7 @@ export class AspoticserviceService {
               album: album,
               comments: [],
               userId: '',
-              spotifyId: item.spotifyId,
+              id: item.id,
               preview_url: item.preview_url
             };
             return track;
