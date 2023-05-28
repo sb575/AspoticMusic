@@ -86,51 +86,42 @@ module.exports.trackFindAll = function(req, res) {
  }
 
  /* GET api/recomendations */
-module.exports.getRecomendations = function(req, res) {
-  Track.find()
-    .then(function(tracks) {
-      const seedTracks = tracks.map((track) => track.id);
+module.exports.getRecomendations = async function(req, res) {
+  try {
+    // Obtén las tracks desde la base de datos
+    const tracks = await Track.find().exec();
 
-      return axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks.join(',')}`, {
-        headers: {
-          'Authorization': `Bearer ${config.accessToken}`
-        }
-      });
-    })
-    .then(function(response) {
-      const recomendations = response.data.tracks.map((item) => {
-        return {
-          id: item.id,
-          album: {
-            id: item.album.id,
-            name: item.album.name,
-            artists: item.album.artists.map((artist) => {
-              return { id: artist.id, name: artist.name };
-            }),
-            images: item.album.images.map((image) => {
-              return { height: image.height, url: image.url, width: image.width };
-            }),
-            release_date: item.album.release_date,
-            release_date_precision: item.album.release_date_precision,
-            total_tracks: item.album.total_tracks,
-          },
-          name: item.name,
-          duration_ms: item.duration_ms,
-          comments: [],
-          latitude: item.latitude,
-          longitude: item.longitude,
-          accuracy: item.accuracy
-        };
-      });
+       // Verifica si hay tracks en la base de datos
+    if (tracks.length === 0) {
+      return res.status(404).json({ error: 'No se encontraron tracks en la base de datos' });
+    }
 
-      res.status(200).json(recomendations);
-      console.log(response.data);
-    })
-    .catch(function(error) {
-      console.error(error);
-      res.status(500).json({ error: error.message });
+    // Extrae los IDs de las tracks para usar como semillas en la API de Spotify
+    const trackIds = tracks.map(track => track.id);
+
+  
+    // Construye la URL para hacer la solicitud a la API de Spotify
+    const baseUrl = 'https://api.spotify.com/v1/recommendations';
+    const seedQuery = `seed_tracks=${trackIds.join(',')}`;
+    const apiUrl = `${baseUrl}?${seedQuery}`;
+
+    // Haz la solicitud a la API de Spotify para obtener las recomendaciones
+    const response = await axios.get(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${config.accessToken}`
+      },
     });
+
+    // Obtén las recomendaciones de la respuesta de la API de Spotify
+    const recommendations = response.data.tracks;
+    res.status(200).json(recommendations);
+    console.log(recommendations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
+
 
 
 /* POST api/tracks */
@@ -148,6 +139,7 @@ module.exports.getRecomendations = function(req, res) {
             artists: track.artists,
             images: track.images,
             duration_ms: track.duration_ms,
+            spotifyId: track.spotifyId,
             preview_url: track.preview_url,
             totalTracks: track.total_tracks,
             comments: track.comments,

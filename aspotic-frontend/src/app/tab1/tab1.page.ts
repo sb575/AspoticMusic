@@ -117,6 +117,7 @@ export class Tab1Page {
             };
           })
         },
+        spotifyId: track.spotifyId,
         preview_url: track.preview_url,
         comments: [],
         userId: this.authService.getUserIdFromToken()

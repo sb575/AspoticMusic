@@ -38,6 +38,7 @@ var trackSchema = mongoose.Schema({
         release_date_precision: String,
         total_tracks: Number,
     },
+    spotifyId: String,
     name: String,
     duration_ms: Number,
     preview_url: String,
