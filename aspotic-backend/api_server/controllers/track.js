@@ -67,6 +67,7 @@ module.exports.trackFindAll = function(req, res) {
           },
           name: item.name,
           duration_ms: item.duration_ms,
+          preview_url: item.preview_url,
           comments: [],
           latitude: item.latitude,
           longitude: item.longitude,
@@ -83,6 +84,55 @@ module.exports.trackFindAll = function(req, res) {
     }
  }
 
+ module.exports.getRecomendations = async function(req, res) {
+  try {
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 20;
+
+    const tracks = this.trackFindAll();
+
+    const seedTracks = tracks.map((track) => track.id);
+
+    const response = await axios.get(`https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks.join(',')}`, {
+      headers: {
+        'Authorization': `Bearer ${config.accessToken}`
+      }
+    });
+
+    const recomendations = response.data.tracks.map((item) => {
+      return {
+        id: item.id,
+        album: {
+          id: item.album.id,
+          name: item.album.name,
+          artists: item.album.artists.map((artist) => {
+            return { id: artist.id, name: artist.name };
+          }),
+          images: item.album.images.map((image) => {
+            return { height: image.height, url: image.url, width: image.width };
+          }),
+          release_date: item.album.release_date,
+          release_date_precision: item.album.release_date_precision,
+          total_tracks: item.album.total_tracks,
+        },
+        name: item.name,
+        duration_ms: item.duration_ms,
+        comments: [],
+        latitude: item.latitude,
+        longitude: item.longitude,
+        accuracy: item.accuracy
+      };
+    });
+
+    res.status(200).json(recomendations);
+    console.log(response.data);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+}
+
 /* POST api/tracks */
  module.exports.addSelectedTracks = async function(req, res) {
     try {
@@ -98,6 +148,7 @@ module.exports.trackFindAll = function(req, res) {
             artists: track.artists,
             images: track.images,
             duration_ms: track.duration_ms,
+            preview_url: track.preview_url,
             totalTracks: track.total_tracks,
             comments: track.comments,
             latitude: track.latitude,

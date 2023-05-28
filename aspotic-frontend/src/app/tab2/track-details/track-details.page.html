@@ -31,8 +31,8 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <div class="card-button">
-      <ion-button class="custom-btn" (click)="editTrackModal(trackId)">Edit track</ion-button>
+    <div class="card-button" *ngIf="userIdLogged !== '' ">
+      <ion-button class="custom-btn"  (click)="editTrackModal(trackId)">Edit track</ion-button>
     </div>
   </ion-card>
 

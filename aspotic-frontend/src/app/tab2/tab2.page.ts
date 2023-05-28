@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Track } from '../models/Track';
 import { AspoticserviceService } from '../services/aspoticservice.service';
 import { Router } from '@angular/router';
-import { AlertController, NavController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonicSlides, NavController, Platform, ToastController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { User } from '../models/User';
 import { AuthService } from '../services/auth.service';
 import { AddTrackPage } from './add-track/add-track.page';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-tab2',
@@ -28,10 +29,12 @@ export class Tab2Page implements OnInit{
   artist: string | undefined;
   name: string | undefined;
   date: string | undefined;
+  swiper: Swiper;
+
+  recomendations: any[] = [];
 
   constructor(private platform: Platform, public navCtrl: NavController, public aspoticServ: AspoticserviceService, public authService: AuthService, public router: Router, private formBuilder: FormBuilder, public modalController: ModalController, private toastController: ToastController, private alertController: AlertController) {
   }
-
 
   async openModal() {
     const modal = await this.modalController.create({
@@ -55,6 +58,17 @@ export class Tab2Page implements OnInit{
     this.getTracks();
   }
 
+  getRecomendations() {
+    this.aspoticServ.getRecomendations().subscribe(
+      (response) => {
+        this.recomendations = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   getTracks() {
     this.aspoticServ.getTracks().subscribe(
       (tracks: Track[]) => {
@@ -66,6 +80,7 @@ export class Tab2Page implements OnInit{
       }
     );
   }
+
 
   searchTracks() {
 

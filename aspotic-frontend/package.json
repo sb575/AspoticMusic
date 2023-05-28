@@ -31,7 +31,7 @@
     "@capacitor/status-bar": "4.1.1",
     "@ionic-native/camera": "^5.36.0",
     "@ionic-native/core": "^5.36.0",
-    "@ionic/angular": "^7.0.0",
+    "@ionic/angular": "^7.0.9",
     "@ionic/pwa-elements": "^3.1.1",
     "@ionic/storage-angular": "^3.0.6",
     "bson-objectid": "^2.0.4",
@@ -45,6 +45,7 @@
     "ngx-pagination": "^6.0.3",
     "pica": "^9.0.1",
     "rxjs": "~7.5.0",
+    "swiper": "^9.3.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

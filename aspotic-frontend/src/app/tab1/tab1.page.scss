@@ -117,10 +117,6 @@ img {
   font-size: 20px;
 }
 
-ion-icon {
-  color: #000000;
-}
-
 ion-searchbar {
   width: 100%;
 }
@@ -225,4 +221,16 @@ ion-searchbar.custom {
 
 ion-spinner {
   transform: scale(3);
+}
+
+
+.custom-floating-btn {
+  width: auto;
+  border-radius: 4px;
+  padding: 0 8px;
+  line-height: normal;
+}
+
+.fab-text {
+  margin-right: 8px;
 }

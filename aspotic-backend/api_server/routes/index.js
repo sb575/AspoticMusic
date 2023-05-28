@@ -140,6 +140,9 @@ router.get('/token', middleware.getAuth);
  */
 router.get('/search/track/:name', ctrlTrack.searchTrackSpotify);
 
+router.get('/recomendations', ctrlTrack.getRecomendations);
+
+
 /**
  * @swagger
  * /tracks/{id}:
@@ -330,6 +333,8 @@ router.get('/tracks/searchTrackDate/:date', ctrlTrack.getTracksByDate);
  *                     total_tracks:
  *                       type: number
  *                       description: Total tracks
+ *                     preview_url:
+ *                       type: string
  *                     comments:
  *                       type: array
  *                       items:

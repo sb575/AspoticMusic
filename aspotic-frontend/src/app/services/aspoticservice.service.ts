@@ -55,6 +55,10 @@ export class AspoticserviceService {
       );
   }
 
+  getRecomendations(): Observable<any> {
+    return this.http.get(`${this.url}/recomendations`);
+  }
+
   createTracks(tracks: Track[]): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

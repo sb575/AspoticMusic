@@ -36,14 +36,14 @@ ion-card .title  {
 
 ion-card-title{
   font-size: medium;
-  color: #ffffff;
+  color: #000000;
   text-align: center;
   justify-content: center;
 }
 
 ion-card-subtitle{
   font-size: small;
-  color: #cccccc;
+  color: #737373;
   text-align: center;
   justify-content: center;
 }
@@ -82,11 +82,13 @@ ion-icon{
 
 .card {
   height: 100%;
+  position: relative;
   border-radius: 5%;
   background-color: #ffffff;
   padding-bottom: 10px;
   margin: 5px;
   margin-bottom: 10px !important;
+  box-shadow: 0px 2px 10px #cccccc !important;
   cursor: pointer;
 }
 
@@ -102,11 +104,11 @@ img {
 }
 
 .page-btn-div {
-  color: black;
+  color: rgb(255, 255, 255);
   float: left;
   padding: 8px 16px;
   text-decoration: none;
-  background-color: #ddd;
+  background-color: #858BFF;
   border-radius: 5px;
 }
 
@@ -115,9 +117,6 @@ img {
   font-size: 20px;
 }
 
-ion-icon {
-  color: #ffffff;
-}
 
 ion-searchbar {
   width: 100%;
@@ -154,20 +153,14 @@ ion-searchbar {
 }
 
 
+
 ion-searchbar.custom {
-  --background: #FFFFFF;
+  --background: #ffffff;
   --icon-color: #858BFF;
-  --clear-button-color: #fff;
   --border-radius: 25px;
 }
 
-ion-searchbar.ios.custom {
-  --cancel-button-color: #858BFF;
-}
 
-ion-searchbar.md.custom {
-  --cancel-button-color: #fff;
-}
 
 @media only screen and (max-width: 600px) {
   .search-container {
@@ -207,4 +200,57 @@ ion-searchbar.md.custom {
 
 ion-spinner {
   transform: scale(3);
+}
+
+ion-segment-button{
+  text-transform: capitalize;
+  color: #858BFF;
+  --border-radius: 0px;
+}
+
+ion-segment-button.segment-button-checked {
+  background-color: #858BFF !important;
+  color: white !important;
+  --color-checked: var(--ion-color-primary, #858BFF) !important;
+  --indicator-box-shadow: none;
+  --indicator-color: var(--color-checked);
+  --indicator-height: 0px;
+}
+
+ion-title{
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+@media (max-width: 576px) {
+  .floating-button {
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+.custom-floating-btn {
+  --background: #858BFF;
+  --color: white;
+  text-transform: capitalize;
+  margin: 15px;
+}
+
+.button-space {
+  height: 20px;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
 }

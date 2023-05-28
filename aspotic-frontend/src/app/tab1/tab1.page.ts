@@ -117,6 +117,7 @@ export class Tab1Page {
             };
           })
         },
+        preview_url: track.preview_url,
         comments: [],
         userId: this.authService.getUserIdFromToken()
       };

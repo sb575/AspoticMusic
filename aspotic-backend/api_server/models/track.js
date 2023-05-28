@@ -40,6 +40,7 @@ var trackSchema = mongoose.Schema({
     },
     name: String,
     duration_ms: Number,
+    preview_url: String,
     comments: [commentSchema],
     genres: [{type: String}],
     latitude: Number,

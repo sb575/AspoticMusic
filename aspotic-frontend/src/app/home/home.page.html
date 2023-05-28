@@ -12,17 +12,22 @@
 
 
 <ion-content>
+  <ion-item>
+    <ion-segment [(ngModel)]="searchOption">
+      <ion-segment-button value="name">
+        Search by name
+      </ion-segment-button>
+      <ion-segment-button value="artist">
+        artist
+      </ion-segment-button>
+      <ion-segment-button value="date">
+        date
+      </ion-segment-button>
+    </ion-segment>
+  </ion-item>
 
   <div class="search-container">
-    <ion-item>
-      <ion-label>Search by:</ion-label>
-      <ion-select [(ngModel)]="searchOption">
-        <ion-select-option value="name">Name</ion-select-option>
-        <ion-select-option value="artist">Artist</ion-select-option>
-        <ion-select-option value="date">Date</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-searchbar class="custom" placeholder="Enter the name of the song" mode="ios" [(ngModel)]="searchTerm"></ion-searchbar>
+    <ion-searchbar class="custom" placeholder="Enter the name of the song" mode="ios" [(ngModel)]="searchTerm" (keyup.enter)="searchTracks()"></ion-searchbar>
     <ion-button class="custom-btn" (click)="searchTracks()">Search</ion-button>
   </div>
 
