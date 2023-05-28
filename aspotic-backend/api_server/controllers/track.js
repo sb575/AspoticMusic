@@ -84,10 +84,9 @@ module.exports.trackFindAll = function(req, res) {
     }
  }
 
+ /* GET api/recomendations */
  module.exports.getRecomendations = async function(req, res) {
   try {
-    const offset = req.query.offset || 0;
-    const limit = req.query.limit || 20;
 
     const tracks = this.trackFindAll();
 

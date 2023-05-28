@@ -140,6 +140,18 @@ router.get('/token', middleware.getAuth);
  */
 router.get('/search/track/:name', ctrlTrack.searchTrackSpotify);
 
+/**
+ * @swagger
+ * /recomendations:
+ *   get:
+ *     summary: get recomendation tracks
+ *     responses:
+ *       200:
+ *         description: Lista de recomendaciones de canciones
+ *       500:
+ *         description: Error interno del servidor
+ */
+
 router.get('/recomendations', ctrlTrack.getRecomendations);
 
 
