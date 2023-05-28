@@ -102,6 +102,10 @@ router.get('/token', middleware.getAuth);
  *           type: string
  *         duration_ms:
  *           type: integer
+ *         spotifyId:
+ *           type: string
+ *         preview_url:
+ *           type: string
  *         comments:
  *           type: array
  *           items:

@@ -95,7 +95,6 @@ module.exports.getRecomendations = async function(req, res) {
     if (tracks.length === 0) {
       return res.status(404).json({ error: 'No se encontraron tracks en la base de datos' });
     }
-
     // Extrae los IDs de las tracks para usar como semillas en la API de Spotify
     const trackIds = tracks.map(track => track.id);
 
