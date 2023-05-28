@@ -351,6 +351,8 @@ router.get('/tracks/searchTrackDate/:date', ctrlTrack.getTracksByDate);
  *                     total_tracks:
  *                       type: number
  *                       description: Total tracks
+ *                     spotifyId:
+ *                       type: string
  *                     preview_url:
  *                       type: string
  *                     comments:

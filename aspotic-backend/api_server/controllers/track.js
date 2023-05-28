@@ -68,6 +68,7 @@ module.exports.trackFindAll = function(req, res) {
           },
           name: item.name,
           duration_ms: item.duration_ms,
+          spotifyId: item.id,
           preview_url: item.preview_url,
           comments: [],
           latitude: item.latitude,

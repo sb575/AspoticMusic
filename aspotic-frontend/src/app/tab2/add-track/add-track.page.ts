@@ -116,7 +116,9 @@ export class AddTrackPage implements OnInit {
         _id: '',
         duration_ms: 0,
         comments: [],
-        userId: userId
+        userId: userId,
+        spotifyId: '',
+        preview_url: ''
       };
 
       const position = await Geolocation.getCurrentPosition();

@@ -46,7 +46,9 @@ export class AspoticserviceService {
               duration_ms: item.duration_ms,
               album: album,
               comments: [],
-              userId: ''
+              userId: '',
+              spotifyId: item.spotifyId,
+              preview_url: item.preview_url
             };
             return track;
           });

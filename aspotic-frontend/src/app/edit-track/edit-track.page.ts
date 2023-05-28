@@ -102,7 +102,9 @@ export class EditTrackPage implements OnInit {
       },
       duration_ms: 0,
       comments: [],
-      userId: userId
+      userId: userId,
+      spotifyId: '',
+      preview_url: ''
     };
 
     this.aspoticServ.editTrack(trackId, updatedTrack)
