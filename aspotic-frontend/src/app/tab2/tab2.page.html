@@ -18,8 +18,10 @@
 
   <div class="search-container">
     <ion-searchbar class="custom" placeholder="Search track" mode="ios" [(ngModel)]="searchTerm" (keyup.enter)="searchTracks()"></ion-searchbar>
-    <ion-button class="custom-btn" (keyup.enter)="searchTracks()" (click)="searchTracks()">Search</ion-button>
-    <ion-button class="custom-btn" (click)="getRecomendations()">Get recommendations</ion-button>
+    <div class="search-buttons">
+      <ion-button class="custom-btn" (keyup.enter)="searchTracks()" (click)="searchTracks()">Search</ion-button>
+      <ion-button class="custom-btn" (click)="getRecomendations()">Get recommendations</ion-button>
+    </div>
   </div>
 
   <div id="container">
@@ -48,7 +50,7 @@
 
     <h1 class="title-sections">Track list</h1>
     <ion-grid class="cards">
-      <ion-row>
+      <ion-row *ngIf="tracks.length > 0; else noTracksIllustration">
         <ion-col size-lg="2" size-md="6" size-sm="4" size="6" *ngFor="let track of tracks" >
           <div class="card">
             <img [src]="track.album.images[0].url" [routerLink]="['/track-details', track._id]">
@@ -65,6 +67,13 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <ng-template #noTracksIllustration>
+      <div class="empty-tracks">
+        <img src="../../assets/icon/emptyList.png" alt="Empty Tracks Illustration" class="empty-image">
+        <p class="empty-text">The track list is empty...</p>
+      </div>
+    </ng-template>
   </div>
 </ion-content>
 

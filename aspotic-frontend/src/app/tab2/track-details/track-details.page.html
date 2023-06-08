@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar *ngIf="track | async as track">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+      <ion-back-button *ngIf="userIdLogged !== '' " defaultHref="/tabs/tab2"></ion-back-button>
+      <ion-back-button *ngIf="userIdLogged === '' " defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>
       {{ track.name }}
@@ -71,5 +72,12 @@
       </ion-col>
     </ion-row>
   </ion-card>
+
+  <ng-container *ngIf="!(track | async)?.comments || (track | async)?.comments.length === 0">
+    <div class="empty-comments">
+      <img src="../../assets/icon/noComments1.png" alt="Empty Comments Illustration" class="empty-image">
+      <p class="empty-text">There is no comments yet...</p>
+    </div>
+  </ng-container>
 
 </ion-content>

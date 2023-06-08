@@ -104,43 +104,42 @@ export class AddCommentPage implements OnInit {
   }
 
   async onSubmit(value: {}): Promise<void> {
-      try {
-        const trackId = this.trackId = this.navParams.get('trackId');
-        const comment = this.newComment;
-        this.newComment.userId = this.userId
-        this.newComment.createdOn = new Date();
+    try {
+      const trackId = this.trackId = this.navParams.get('trackId');
+      const comment = this.newComment;
+      this.newComment.userId = this.userId;
+      this.newComment.createdOn = new Date();
 
-        const position = await Geolocation.getCurrentPosition();
-        const longitude = position.coords.longitude;
-        const latitude = position.coords.latitude;
-        const accuracy = position.coords.accuracy;
+      const position = await Geolocation.getCurrentPosition();
+      const longitude = position.coords.longitude;
+      const latitude = position.coords.latitude;
+      const accuracy = position.coords.accuracy;
 
-        comment.longitude = longitude;
-        comment.latitude = latitude;
-        comment.accuracy = accuracy;
+      comment.longitude = longitude;
+      comment.latitude = latitude;
+      comment.accuracy = accuracy;
 
-        this.aspoticServ.addCommentToTrack(trackId, comment)
-          .subscribe((comment) => {
-            console.log(comment);
-            this.newComment = {
-              comment: '',
-              rating: 0,
-              _id: '',
-              author: '',
-              createdOn: new Date(),
-              userId: ''
-            };
-          });
-          this.showSuccessMessage("Comment added successfully")
-          this.dismiss();
-          this.platform.ready().then(() => {
-            location.reload();
-          });
-      } catch (error) {
-        console.error(error);
-        this.showError("There was a problem adding the comment")
-        this.dismiss();
-      }
+      await this.aspoticServ.addCommentToTrack(trackId, comment).toPromise();
+      console.log(comment);
+      this.newComment = {
+        comment: '',
+        rating: 0,
+        _id: '',
+        author: '',
+        createdOn: new Date(),
+        userId: ''
+      };
+
+      this.showSuccessMessage("Comment added successfully");
+      this.dismiss();
+      this.platform.ready().then(() => {
+        location.reload();
+      });
+    } catch (error) {
+      console.error(error);
+      this.showError("There was a problem adding the comment");
+      this.dismiss();
     }
+  }
 }
 
