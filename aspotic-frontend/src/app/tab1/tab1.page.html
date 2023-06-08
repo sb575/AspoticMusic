@@ -5,11 +5,13 @@
 
   <div class="search-container">
     <ion-searchbar class="custom" placeholder="Enter the name of the song" mode="ios" [(ngModel)]="searchTerm" (keyup.enter)="doSearch()"></ion-searchbar>
-    <ion-button class="custom-btn" (click)="doSearch()" [disabled]="loading">Search</ion-button>
-    <ion-button class="custom-btn-add" slot="end" *ngIf="showAddSongsButton" (click)="addSongs()">
-      <ion-icon slot="start" name="add-circle"></ion-icon>
-      Add tracks
-    </ion-button>
+    <div class="search-buttons">
+      <ion-button class="custom-btn" (click)="doSearch()" [disabled]="loading">Search</ion-button>
+      <ion-button class="custom-btn-add" slot="end" *ngIf="showAddSongsButton" (click)="addSongs()">
+        <ion-icon slot="start" name="add-circle"></ion-icon>
+        Add tracks
+      </ion-button>
+    </div>
   </div>
 
   <div id="container">
@@ -19,7 +21,7 @@
     </div>
 
     <ion-grid class="cards" *ngIf="!loading">
-      <ion-row>
+      <ion-row *ngIf="tracks.length > 0; else noTracksIllustration">
         <ion-col size-lg="2" size-md="6" size-sm="4" size="6" *ngFor="let track of tracks; let i = index;" >
           <div class="card" (click)="onTrackSelected(i)"  [class.selected]="selectedTracks[i]">
             <img [src]="track.album.images[0].url">
@@ -33,6 +35,13 @@
       </ion-row>
     </ion-grid>
   </div>
+
+  <ng-template #noTracksIllustration>
+    <div class="empty-tracks">
+      <img src="../../assets/icon/searchSpotify.png" alt="Empty Tracks Illustration" class="empty-image">
+      <p class="empty-text">Search your favorite songs on spotify and save them!</p>
+    </div>
+  </ng-template>
 
   <div class="pagination" *ngIf="tracks.length > 0">
     <button *ngIf="page !== 1" class="page-button" (click)="prevPage()"><ion-icon name="chevron-back-outline"></ion-icon></button>

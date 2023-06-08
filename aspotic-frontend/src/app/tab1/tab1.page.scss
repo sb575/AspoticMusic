@@ -167,9 +167,8 @@ ion-searchbar {
   --background: #858BFF;
   --color: white;
   --border-radius: 25px;
+  margin-top: 10px;
   text-transform: capitalize;
-  margin-top: 15px;
-  margin-bottom: 15px;
 }
 
 .add-margin-right{
@@ -233,4 +232,31 @@ ion-spinner {
 
 .fab-text {
   margin-right: 8px;
+}
+
+.empty-tracks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-image {
+  width: 200px;
+  height: auto;
+}
+
+.empty-text {
+  margin-top: 10px;
+  text-align: center;
+  margin-left: 20%;
+  margin-right: 20%;
+  color:#858BFF;
+  font-weight: bold;
+}
+
+.search-buttons {
+  display: flex;
+  gap: 10px;
 }
